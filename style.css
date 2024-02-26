@@ -1,0 +1,106 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #282c36;
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150vh;
+  margin: 0;
+}
+
+#city-display {
+  font-size: 35px;
+}
+
+.weather-app {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 20px;
+  width: 320px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+}
+
+#city-input {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-left: 15px;
+}
+
+#search-button {
+  background-color: dodgerblue;
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+h2 {
+  text-align: center;
+  color: dodgerblue;
+}
+
+/* Convert F to C  */
+#convert {
+  display: flex;
+  justify-content: center;
+}
+
+#temperature,
+#celsius-link,
+#fahrenheit-link {
+  text-align: center;
+  color: dodgerblue;
+  font-size: 22px;
+  margin: 5px;
+}
+
+#datetime {
+  color: dodgerblue;
+  font-size: 22px;
+  margin: 5px;
+}
+
+#weather-description {
+  color: dodgerblue;
+  font-size: 22px;
+  margin: 5px;
+}
+
+.info {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#display-temp-value-unit {
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: dodgerblue;
+}
+
+#unit-temp-F {
+  margin-right: 20px;
+}
+.additional-info {
+  margin-top: 20px;
+}
+
+.additional-info div {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+#coded-by {
+  margin-top: 20px;
+  margin-bottom: 0;
+  color: dodgerblue;
+  display: flex;
+  justify-content: center;
+}
