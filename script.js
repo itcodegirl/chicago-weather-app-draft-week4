@@ -7,15 +7,12 @@
 // Run every second thereafter
 
 //Function to display the date and time
+//Designed to continuously update the day and time on a webpage every second.
 function updateDateTime() {
-  //event.preventDefault(); // Prevent the default behavior that causes page reload
   const now = new Date();
   const currentDateTime = now.toLocaleString();
   document.querySelector("#datetime").textContent = currentDateTime;
 }
-
-// Set an interval to update the date and time every second
-// Add an event listener to the document for the "DOMContentLoaded" event
 document.addEventListener("DOMContentLoaded", function () {
   setInterval(updateDateTime, 1000);
 });
@@ -28,17 +25,28 @@ function searchButton(event) {
   let h2 = document.querySelector("#city-display");
   let city = searchInput.value.trim();
 
-  if (city && weatherData.hasOwnProperty(city)) {
+  if (city) { // Assuming weatherData check is handled elsewhere or you fetch it regardless
     h2.innerHTML = `${city}`;
     // You can add more code here to display temperature, humidity, etc.
+    let apiKey = "98f12063t8f0b4be43fb6oa12441998c";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
+    axios.get(apiUrl).then(function (response) {
+      const temperature = response.data.temperature;
+      document.querySelector('#temperature').textContent = `${temperature}°`;
+    }).catch(function (error) {
+      console.error("Error fetching data: ", error);
+      alert("Failed to fetch weather data.");
+    });
   } else {
     alert("City not found or data unavailable");
   }
 }
+
 document.addEventListener("DOMContentLoaded", function () {
   let form = document.querySelector("#search-form");
   form.addEventListener("submit", searchButton); // This line associates the submit event with searchButton
 });
+
 
 //Function to convert C&F temps
 function convertToFahrenheit2(event) {
