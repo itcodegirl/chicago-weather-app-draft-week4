@@ -5,42 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@500&family=Sofia+Sans:wght@600&display=swap"
       rel="stylesheet"
     />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
-
   <body>
     <div class="weather-app">
       <form id="search-form">
+        <label for="city-input">Search for a city:</label>
         <input
           type="text"
-          placeholder="Search for a city"
+          placeholder="Enter city name"
           autocomplete="off"
-          autofocus="on"
+          autofocus
           class="search-bar"
           id="city-input"
         />
         <input type="submit" value="Get Weather" id="search-button" />
       </form>
       <h2 id="city-display"></h2>
-
       <div id="convert">
-        <div>
-          🌥
-          <span id="temperature"> 18° </span>
-        </div>
-
+        <div>🌥 <span id="temperature">18°</span></div>
         <div>
           <a href="#" id="celsius-link">°C</a> |
           <a href="#" id="fahrenheit-link">°F</a>
         </div>
       </div>
-
       <div class="info">
         <div id="datetime"></div>
       </div>
@@ -53,10 +45,8 @@
         <div>Sunrise: <span>6:00 AM</span></div>
         <div>Sunset: <span>8:00 PM</span></div>
       </div>
-
       <div id="coded-by">Coded by Jenna Zawaski</div>
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>
