@@ -1,11 +1,3 @@
-// Define the function outside window.onload to make it globally accessible
-// create a function to update the date and time
-// create a new `Date` object
-// get the current date and time as a string
-// update the `textContent` property of the `span` element with the `id` of `datetime`
-// call the `updateDateTime` function every second
-// Run every second thereafter
-
 //Function to display the date and time
 //Designed to continuously update the day and time on a webpage every second.
 function updateDateTime() {
