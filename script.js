@@ -1,78 +1,60 @@
-//Function to display the date and time
-//Designed to continuously update the day and time on a webpage every second.
+// Function to display the date and time
 function updateDateTime() {
   const now = new Date();
-  const currentDateTime = now.toLocaleString();
-  document.querySelector("#datetime").textContent = currentDateTime;
+  document.querySelector("#datetime").textContent = now.toLocaleString();
 }
+
 document.addEventListener("DOMContentLoaded", function () {
   setInterval(updateDateTime, 1000);
 });
 
-//Function to display city input
+
+// Function to fetch and display weather data from OpenWeatherMap
+function fetchWeatherData(city) {
+  const apiKey = "d9126eda46b6755db8578eaa14ec0ba3"; // Replace with your actual OpenWeatherMap API key
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`; // Metric units for Celsius
+
+  axios.get(apiUrl).then(response => {
+    const temperature = response.data.main.temp; // Accessing the temperature from the response
+    document.querySelector('#temperature').textContent = `${temperature}°C`; // Updating the temperature display
+  }).catch(error => {
+    console.error("Error fetching data: ", error);
+    alert("Failed to fetch weather data. Please check city name and network connection.");
+  });
+}
+
 // Function to handle form submission
 function searchButton(event) {
   event.preventDefault();
-  let searchInput = document.querySelector("#city-input");
-  let h2 = document.querySelector("#city-display");
-  let city = searchInput.value.trim();
+  const searchInput = document.querySelector("#city-input").value.trim();
 
-  if (city) { // Assuming weatherData check is handled elsewhere or you fetch it regardless
-    h2.innerHTML = `${city}`;
-    // You can add more code here to display temperature, humidity, etc.
-    let apiKey = "98f12063t8f0b4be43fb6oa12441998c";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
-    axios.get(apiUrl).then(function (response) {
-      const temperature = response.data.temperature;
-      document.querySelector('#temperature').textContent = `${temperature}°`;
-    }).catch(function (error) {
-      console.error("Error fetching data: ", error);
-      alert("Failed to fetch weather data.");
-    });
+  if (searchInput) {
+    document.querySelector("#city-display").textContent = searchInput;
+    fetchWeatherData(searchInput);
   } else {
-    alert("City not found or data unavailable");
+    alert("Please enter a city name.");
   }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  let form = document.querySelector("#search-form");
-  form.addEventListener("submit", searchButton); // This line associates the submit event with searchButton
+  document.querySelector("#search-form").addEventListener("submit", searchButton);
 });
 
-
-//Function to convert C&F temps
-function convertToFahrenheit2(event) {
+// Function to convert temperatures
+function convertTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 6;
-}
-function convertToCelsius2(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 19;
-}
-let fahrenheitLink2 = document.querySelector("#fahrenheit-link");
-fahrenheitLink2.addEventListener("click", convertToFahrenheit2);
+  const isFahrenheit = event.target.id === "fahrenheit-link";
+  const currentTemperature = parseInt(temperatureElement.textContent);
 
-let celsiusLink2 = document.querySelector("#celsius-link");
-celsiusLink2.addEventListener("click", convertToCelsius2);
-
-//Function to display C&F temps
-function converttoFahrenheit(event) {
-  event.preventDefault();
-  let displayFahrenheit = document.querySelector("#temp-value-F");
-
-  displayFahrenheit.innerHTML = 63;
+  if (isFahrenheit) {
+    const fahrenheit = Math.round(currentTemperature * (9 / 5) + 32);
+    temperatureElement.textContent = `${fahrenheit}°F`;
+  } else {
+    const celsius = Math.round((currentTemperature - 32) * (5 / 9));
+    temperatureElement.textContent = `${celsius}°C`;
+  }
 }
 
-function converttoCelsius(event) {
-  event.preventDefault();
-  let displayCelsius = document.querySelector("#temp-value-C");
-  displayCelsius.innerHTML = 17;
-}
-
-let fahrenheitLink = document.querySelector("#temp-value-F");
-fahrenheitLink.addEventListener("click", converttoFahrenheit);
-
-let celsiusLink = document.querySelector("#temp-value-C");
-celsiusLink.addEventListener("click", converttoCelsius);
+document.querySelector("#fahrenheit-link").addEventListener("click", convertTemperature);
+document.querySelector("#celsius-link").addEventListener("click", convertTemperature);
