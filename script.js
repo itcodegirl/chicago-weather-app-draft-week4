@@ -18,8 +18,7 @@ function fetchWeatherData(city) {
     const temperature = response.data.main.temp; // Accessing the temperature from the response
     document.querySelector('#temperature').textContent = `${temperature}°C`; // Updating the temperature display
 
-    const precipatation = response.data.main.temp; // Accessing the temperature from the response
-    document.querySelector('#preciptation').textContent = `${preciptation}°C`; // Updating the temperature display
+
   }).catch(error => {
     console.error("Error fetching data: ", error);
     alert("Failed to fetch weather data. Please check city name and network connection.");
